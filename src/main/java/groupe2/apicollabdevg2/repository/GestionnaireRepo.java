@@ -1,4 +1,9 @@
 package groupe2.apicollabdevg2.repository;
 
-public interface GestionnaireRepo {
+import groupe2.apicollabdevg2.entity.Gestionnaire;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface GestionnaireRepo extends JpaRepository<Gestionnaire, Integer> {
+    boolean existsGestionnaireByEmail(String email);
+
 }

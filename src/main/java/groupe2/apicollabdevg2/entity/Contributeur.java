@@ -13,11 +13,11 @@ import lombok.*;
 @AllArgsConstructor
 public class Contributeur {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)// generation de id de façcons auto
     private int id;
     @Column(unique = true)
     private String nom;
-    @Column(unique = true)
+    @Column(unique = true) // les donner de cette colone sont unique pas de doublon
     private String prenom;
     @Column(nullable = false, unique = true) // Email obligatoire et unique
     private String email;
