@@ -3,53 +3,30 @@ package groupe2.apicollabdevg2.entity;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.List;
+
 @Entity
 @Table(name = "Gestionnaire")
 @Getter
 @Setter
-@NoArgsConstructor
-@AllArgsConstructor
+//@NoArgsConstructor
 @ToString
-public class Gestionnaire {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
-    @Column(unique = true)
-    private String nom;
-    @Column(unique = true)
-    private String prenom;
-    @Column(nullable = false, unique = true)
-    private String email;
+public class Gestionnaire extends Contributeur {
 
-    public int getId() {
-        return id;
+    @OneToMany(mappedBy = "Fonctionalites")
+    private List<Fonctionnalites> fonctionnalites;
+
+
+    @OneToMany(mappedBy = "gestionnaire")
+    private List<Projet> projet;
+
+    public Gestionnaire( String nom, String prenom, String email, Profil profil, Nivau niveau) {
+        super( nom, prenom, email, profil, niveau);
     }
 
-    public void setId(int id) {
-        this.id = id;
-    }
+    public Gestionnaire() {}
 
-    public String getNom() {
-        return nom;
-    }
 
-    public void setNom(String nom) {
-        this.nom = nom;
-    }
 
-    public String getPrenom() {
-        return prenom;
-    }
 
-    public void setPrenom(String prenom) {
-        this.prenom = prenom;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
 }

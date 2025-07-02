@@ -5,12 +5,14 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import lombok.*;
 
+import java.util.List;
+
 @Entity
 @Table(name = "Contributeur")
 @Getter
 @Setter
-@NoArgsConstructor
-@AllArgsConstructor
+//@NoArgsConstructor
+@Inheritance(strategy = InheritanceType.JOINED)
 public class Contributeur {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)// generation de id de façcons auto
@@ -21,10 +23,41 @@ public class Contributeur {
     private String prenom;
     @Column(nullable = false, unique = true) // Email obligatoire et unique
     private String email;
+    @Column(nullable = false, unique = true) // Email obligatoire et unique
+    private String password;
     @Enumerated(EnumType.STRING)
     private Profil profil;
     @Enumerated(EnumType.STRING)
     private Nivau niveau;
+
+    public Contributeur( String nom, String prenom, String email, Profil profil, Nivau niveau) {
+        //this.id = id;
+        this.nom = nom;
+        this.prenom = prenom;
+        this.email = email;
+        this.profil = profil;
+        this.niveau = niveau;
+    }
+
+    public Contributeur(){}
+
+    @OneToMany(mappedBy = "contributeur")
+    private List<IdeeProjet> ideeProjets;
+
+    @OneToMany(mappedBy = "contributeur")
+    private List<Badges> badges;
+
+    @OneToMany(mappedBy = "contributeur")
+    private List<Coins> coins;
+
+    @OneToMany(mappedBy = "contributeur")
+    private List<Contribution> contribution;
+
+    @OneToMany(mappedBy = "contributeur")
+    private List<DemandeParticipation> demandeParticipation;
+
+    @OneToMany(mappedBy = "contributeur")
+    private List<Fonctionnalites> fonctionnalites;
 
     public int getId() {
         return id;
@@ -72,5 +105,13 @@ public class Contributeur {
 
     public void setNiveau(Nivau niveau) {
         this.niveau = niveau;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 }

@@ -9,8 +9,12 @@ import java.util.Optional;
 
 public interface ContributeurRepo extends JpaRepository<Contributeur, Integer> {
     boolean existsByEmail(String email);
+    boolean existsByPassword(String password);
     // Recherche par email
         Optional<Contributeur> findByEmail(String email);
+
+        //Recherche par mot de passe
+        Optional<Contributeur> findByPassword(String password);
 
         // Recherche par nom (ignore la casse)
         List<Contributeur> findByNomIgnoreCase(String nom);
