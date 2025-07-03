@@ -11,6 +11,7 @@ import java.util.List;
 @Table(name = "Contributeur")
 @Getter
 @Setter
+@AllArgsConstructor
 //@NoArgsConstructor
 @Inheritance(strategy = InheritanceType.JOINED)
 public class Contributeur {
@@ -18,28 +19,21 @@ public class Contributeur {
     @GeneratedValue(strategy = GenerationType.IDENTITY)// generation de id de façcons auto
     private int id;
     @Column(unique = true)
+    //@Column(unique = false)
     private String nom;
-    @Column(unique = true) // les donner de cette colone sont unique pas de doublon
+    @Column(unique = true)
+    //@Column(unique = false) // rend le nom non unique
     private String prenom;
     @Column(nullable = false, unique = true) // Email obligatoire et unique
     private String email;
-    @Column(nullable = false, unique = true) // Email obligatoire et unique
+    //@Column(nullable = false, unique = true) // Email obligatoire et unique
     private String password;
     @Enumerated(EnumType.STRING)
     private Profil profil;
     @Enumerated(EnumType.STRING)
     private Nivau niveau;
-
-    public Contributeur( String nom, String prenom, String email, Profil profil, Nivau niveau) {
-        //this.id = id;
-        this.nom = nom;
-        this.prenom = prenom;
-        this.email = email;
-        this.profil = profil;
-        this.niveau = niveau;
-    }
-
-    public Contributeur(){}
+    private boolean connected = false;
+    //public Contributeur(){}
 
     @OneToMany(mappedBy = "contributeur")
     private List<IdeeProjet> ideeProjets;
@@ -58,6 +52,30 @@ public class Contributeur {
 
     @OneToMany(mappedBy = "contributeur")
     private List<Fonctionnalites> fonctionnalites;
+
+    public Contributeur() {
+    }
+
+    public Contributeur(String nom, String prenom, String email, String password, Profil profil, Nivau niveau) {
+
+        this.nom = nom;
+        this.prenom = prenom;
+        this.email = email;
+        this.password = password;
+        this.profil = profil;
+        this.niveau = niveau;
+        this.connected = false;
+
+
+    }
+
+    public boolean isConnected() {
+        return connected;
+    }
+
+    public void setConnected(boolean connected) {
+        this.connected = connected;
+    }
 
     public int getId() {
         return id;
@@ -91,6 +109,14 @@ public class Contributeur {
         this.email = email;
     }
 
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
     public Profil getProfil() {
         return profil;
     }
@@ -105,13 +131,5 @@ public class Contributeur {
 
     public void setNiveau(Nivau niveau) {
         this.niveau = niveau;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
     }
 }

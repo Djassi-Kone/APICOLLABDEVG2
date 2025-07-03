@@ -20,8 +20,8 @@ public class Gestionnaire extends Contributeur {
     @OneToMany(mappedBy = "gestionnaire")
     private List<Projet> projet;
 
-    public Gestionnaire( String nom, String prenom, String email, Profil profil, Nivau niveau) {
-        super( nom, prenom, email, profil, niveau);
+    public Gestionnaire( String nom, String prenom, String email, String password, Profil profil, Nivau niveau) {
+        super(nom, prenom, email, password, profil, niveau);
     }
 
     public Gestionnaire() {}
