@@ -1,4 +1,4 @@
 package groupe2.apicollabdevg2.DTO;
 
-public class UserDTO {
+public class ProjetDTO {
 }

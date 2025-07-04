@@ -23,4 +23,8 @@ public class Projet {
     @ManyToOne
     @JoinColumn(name="projet_id", nullable=false,referencedColumnName="id")
     private Gestionnaire gestionnaire;
+
+    @OneToMany(mappedBy = "projet")
+
+    private List<Contribution> contributions;
 }
