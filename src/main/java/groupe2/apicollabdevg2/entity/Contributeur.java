@@ -1,39 +1,36 @@
 package groupe2.apicollabdevg2.entity;
 
-
+import groupe2.apicollabdevg2.Enum.Nivau;
+import groupe2.apicollabdevg2.Enum.Profil;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotBlank;
-import lombok.*;
-
 import java.util.List;
 
 @Entity
 @Table(name = "Contributeur")
-@Getter
-@Setter
-@AllArgsConstructor
-//@NoArgsConstructor
 @Inheritance(strategy = InheritanceType.JOINED)
 public class Contributeur {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)// generation de id de façcons auto
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    @Column(unique = true)
-    //@Column(unique = false)
+
+    @Column(unique = false)
     private String nom;
-    @Column(unique = true)
-    //@Column(unique = false) // rend le nom non unique
+
+    @Column(unique = false)
     private String prenom;
-    @Column(nullable = false, unique = true) // Email obligatoire et unique
+
+    @Column(nullable = false, unique = true)
     private String email;
-    //@Column(nullable = false, unique = true) // Email obligatoire et unique
+
     private String password;
+
     @Enumerated(EnumType.STRING)
     private Profil profil;
+
     @Enumerated(EnumType.STRING)
     private Nivau niveau;
+
     private boolean connected = false;
-    //public Contributeur(){}
 
     @OneToMany(mappedBy = "contributeur")
     private List<IdeeProjet> ideeProjets;
@@ -53,11 +50,12 @@ public class Contributeur {
     @OneToMany(mappedBy = "contributeur")
     private List<Fonctionnalites> fonctionnalites;
 
+    // Constructeur par défaut
     public Contributeur() {
     }
 
+    // Constructeur avec paramètres
     public Contributeur(String nom, String prenom, String email, String password, Profil profil, Nivau niveau) {
-
         this.nom = nom;
         this.prenom = prenom;
         this.email = email;
@@ -65,10 +63,9 @@ public class Contributeur {
         this.profil = profil;
         this.niveau = niveau;
         this.connected = false;
-
-
     }
 
+    // Getters et setters
     public boolean isConnected() {
         return connected;
     }
@@ -132,4 +129,15 @@ public class Contributeur {
     public void setNiveau(Nivau niveau) {
         this.niveau = niveau;
     }
+
+    // Getters pour les relations (optionnel selon vos besoins)
+    public List<IdeeProjet> getIdeeProjets() {
+        return ideeProjets;
+    }
+
+    public void setIdeeProjets(List<IdeeProjet> ideeProjets) {
+        this.ideeProjets = ideeProjets;
+    }
+
+    // Ajoutez les autres getters/setters pour les relations si nécessaire
 }

@@ -1,7 +1,7 @@
 package groupe2.apicollabdevg2.repository;
 
 import groupe2.apicollabdevg2.entity.Contributeur;
-import groupe2.apicollabdevg2.entity.Profil;
+import groupe2.apicollabdevg2.Enum.Profil;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;

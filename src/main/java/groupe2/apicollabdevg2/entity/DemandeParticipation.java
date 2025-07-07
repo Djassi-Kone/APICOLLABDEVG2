@@ -1,5 +1,6 @@
 package groupe2.apicollabdevg2.entity;
 
+import groupe2.apicollabdevg2.Enum.Statut;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;

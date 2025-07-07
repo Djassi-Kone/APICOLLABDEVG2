@@ -1,7 +1,7 @@
 package groupe2.apicollabdevg2.DTO;
 
-import groupe2.apicollabdevg2.entity.Nivau;
-import groupe2.apicollabdevg2.entity.Profil;
+import groupe2.apicollabdevg2.Enum.Nivau;
+import groupe2.apicollabdevg2.Enum.Profil;
 
 public class ContributeurDTO {
    private String nom;

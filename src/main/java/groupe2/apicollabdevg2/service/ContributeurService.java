@@ -3,6 +3,7 @@ package groupe2.apicollabdevg2.service;
 import groupe2.apicollabdevg2.DTO.ContributeurDTO;
 import groupe2.apicollabdevg2.entity.Contributeur;
 import groupe2.apicollabdevg2.repository.ContributeurRepo;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -12,11 +13,8 @@ import java.util.Optional;
 @Service
 public class ContributeurService {
 
-    private final ContributeurRepo contributeurRepo;
-
-    public ContributeurService(ContributeurRepo contributeurRepo) {
-        this.contributeurRepo = contributeurRepo;
-    }
+    @Autowired
+    private ContributeurRepo contributeurRepo;
 
     public Contributeur afficher(int id) {
         return contributeurRepo.findById(id).orElseThrow();
@@ -42,6 +40,7 @@ public class ContributeurService {
         if (!contributeurRepo.existsById(contributeur.getId())) {
             throw new RuntimeException("Contributeur introuvable");
         }
+
         return contributeurRepo.save(contributeur);
     }
 
@@ -86,5 +85,16 @@ public Contributeur Contributeurconect(String email, String password) {
 
         return contributeurRepo.save(contributeur);
     }
+    public Contributeur updateContributeur(int id, ContributeurDTO contributeurDTO) {
+        Contributeur contributeur = afficher(id);
 
+        contributeur.setNom(contributeurDTO.getNom());
+        contributeur.setPrenom(contributeurDTO.getPrenom());
+        contributeur.setEmail(contributeurDTO.getEmail());
+        contributeur.setPassword(contributeurDTO.getPassword());
+        contributeur.setProfil(contributeurDTO.getProfil());
+        contributeur.setNiveau(contributeurDTO.getNiveau());
+
+        return contributeurRepo.save(contributeur);
+    }
 }

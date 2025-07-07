@@ -1,4 +1,4 @@
-package groupe2.apicollabdevg2.entity;
+package groupe2.apicollabdevg2.Enum;
 
 public enum Nivau {
     Debutant1, Debutant2, Debutant3,

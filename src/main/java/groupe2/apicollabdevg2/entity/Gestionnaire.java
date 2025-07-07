@@ -1,5 +1,7 @@
 package groupe2.apicollabdevg2.entity;
 
+import groupe2.apicollabdevg2.Enum.Nivau;
+import groupe2.apicollabdevg2.Enum.Profil;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -20,7 +22,7 @@ public class Gestionnaire extends Contributeur {
     @OneToMany(mappedBy = "gestionnaire")
     private List<Projet> projet;
 
-    public Gestionnaire( String nom, String prenom, String email, String password, Profil profil, Nivau niveau) {
+    public Gestionnaire(String nom, String prenom, String email, String password, Profil profil, Nivau niveau) {
         super(nom, prenom, email, password, profil, niveau);
     }
 
